@@ -51,20 +51,27 @@ class GSTConfig(Coqpit):
 @dataclass
 class CapacitronVAEConfig(Coqpit):
     """Defines the capacitron VAE Module
+
     Args:
         capacitron_capacity (int):
             Defines the variational capacity limit of the prosody embeddings. Defaults to 150.
+
         capacitron_VAE_embedding_dim (int):
             Defines the size of the Capacitron embedding vector dimension. Defaults to 128.
+
         capacitron_use_text_summary_embeddings (bool):
             If True, use a text summary embedding in Capacitron. Defaults to True.
+
         capacitron_text_summary_embedding_dim (int):
             Defines the size of the capacitron text embedding vector dimension. Defaults to 128.
+
         capacitron_use_speaker_embedding (bool):
             if True use speaker embeddings in Capacitron. Defaults to False.
+
         capacitron_VAE_loss_alpha (float):
             Weight for the VAE loss of the Tacotron model. If set less than or equal to zero, it disables the
             corresponding loss function. Defaults to 0.25
+
         capacitron_grad_clip (float):
             Gradient clipping value for all gradients except beta. Defaults to 5.0
     """
@@ -136,10 +143,8 @@ class CharactersConfig(Coqpit):
     """
 
     characters_class: str = None
-
     # using BaseVocabulary
     vocab_dict: Dict = None
-
     # using on BaseCharacters
     pad: str = None
     eos: str = None
@@ -157,7 +162,6 @@ class BaseTTSConfig(BaseTrainingConfig):
     """Shared parameters among all the tts models.
 
     Args:
-
         audio (BaseAudioConfig):
             Audio processor config object instance.
 
@@ -204,7 +208,7 @@ class BaseTTSConfig(BaseTrainingConfig):
             Minimum length of input text to be used. All shorter samples will be ignored. Defaults to 0.
 
         max_text_len (int):
-            Maximum length of input text to be used. All longer samples will be ignored. Defaults to float("inf").
+            Maximum length of input text to be used. All longer samples will be ignored. Defaults to 999999999.
 
         min_audio_len (int):
             Minimum length of input audio to be used. All shorter samples will be ignored. Defaults to 0.
@@ -212,7 +216,7 @@ class BaseTTSConfig(BaseTrainingConfig):
         max_audio_len (int):
             Maximum length of input audio to be used. All longer samples will be ignored. The maximum length in the
             dataset defines the VRAM used in the training. Hence, pay attention to this value if you encounter an
-            OOM error in training. Defaults to float("inf").
+            OOM error in training. Defaults to 999999999.
 
         compute_f0 (int):
             (Not in use yet).
@@ -311,9 +315,9 @@ class BaseTTSConfig(BaseTrainingConfig):
     loss_masking: bool = None
     # dataloading
     min_audio_len: int = 1
-    max_audio_len: int = float("inf")
+    max_audio_len: int = 999999999
     min_text_len: int = 1
-    max_text_len: int = float("inf")
+    max_text_len: int = 999999999
     compute_f0: bool = False
     compute_energy: bool = False
     compute_linear_spec: bool = False
